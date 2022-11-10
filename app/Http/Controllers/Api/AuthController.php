@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPassword;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -127,8 +128,16 @@ class AuthController extends Controller
             return responseJson('0',$validator->errors()->first(),$validator->errors());
         }
         $client = $request->user();
-        $request->merge(['password'=> bcrypt($request->password)]);
+        if($request->password){
+            $request->merge(['password'=> bcrypt($request->password)]);
+        }
         $client->update($request->all());
+
+        return $request->user()->fresh()->load('city.governorate','bloodType');
+    }
+
+    public function notificationsSettings(Request $request){
+        
     }
 
 }

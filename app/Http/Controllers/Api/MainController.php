@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 use App\Models\City;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Settings;
+use App\Models\BloodType;
+use App\Models\Governorate;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Article;
-use App\Models\BloodType;
-use App\Models\Category;
-use App\Models\Governorate;
-use App\Models\Settings;
 
 class MainController extends Controller
 {
@@ -26,17 +27,17 @@ class MainController extends Controller
         return responseJson('1','success',$governorates);
     }
     public function articles(Request $request, Article $article){
-        $articles = Article::where(function($query)use($request,$article){
+        $articles = Article::where(function($query) use($request,$article){
             if($request->has('search')){
-                $query->latest()->filter(request(['search']),$article->columns)->get();
+                $query->filter(request(['search']));
             }
             if($request->has('category_id')){
-                $query->latest()->where('category_id',$request->category_id)->get();
+                $query->where('category_id',$request->category_id);
             }
             if($request->has('article_id')){
-                $query->where('id',$request->article_id)->get();
+                $query->where('id',$request->article_id);
             }
-        })->get();
+        })->latest()->get();
         return responseJson('1','success',$articles);
     }
     public function bloodTypes(){
@@ -49,7 +50,16 @@ class MainController extends Controller
     }
     
     public function settings(){
-        $settings = Settings::all();
-        return responseJson('1','success',$settings);
+        $settings = Settings::first();
+        if($settings){
+            return responseJson('1','success',$settings);
+        }else{
+            return responseJson('0','failure');  
+        }
+    }
+
+    public function notifications(){
+        $notifications = Notification::paginate(10);
+        return responseJson('1','success',$notifications);
     }
 }

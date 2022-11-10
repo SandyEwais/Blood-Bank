@@ -22,12 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1'],function(){
     
-    Route::get('/governorates',[MainController::class,'governorates']);
-    Route::get('/cities',[MainController::class,'cities']);
-    Route::get('/articles',[MainController::class,'articles']);
-    Route::get('/blood-types',[MainController::class,'bloodTypes']);
-    Route::get('/categories',[MainController::class,'categories']);
-    Route::get('/settings',[MainController::class,'settings']);
+    
 
     Route::post('/register',[AuthController::class,'register']);
     Route::post('/login',[AuthController::class,'login']);
@@ -36,5 +31,13 @@ Route::group(['prefix' => 'v1'],function(){
 
     Route::group(['middleware' => 'auth:api'],function(){
         Route::post('/profile',[AuthController::class,'profile']);
+        Route::get('/notifications',[MainController::class,'notifications']);
+        Route::post('/notifications-settings',[AuthController::class,'notificationsSettings']);
+        Route::get('/governorates',[MainController::class,'governorates']);
+        Route::get('/cities',[MainController::class,'cities']);
+        Route::get('/articles',[MainController::class,'articles']);
+        Route::get('/blood-types',[MainController::class,'bloodTypes']);
+        Route::get('/categories',[MainController::class,'categories']);
+        Route::get('/settings',[MainController::class,'settings']);
     });
 });

@@ -2,7 +2,8 @@
 namespace App\Traits;
 trait Searchable
 {
-    public function scopeFilter($query,array $filter,array $columns){
+    public function scopeFilter($query,array $filter){
+        $columns = $this->columns;
         
         if($filter['search'] ?? false){
             
