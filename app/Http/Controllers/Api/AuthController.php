@@ -147,8 +147,8 @@ class AuthController extends Controller
         if($request->has('governorate_id')){
             $request->user()->governorates()->sync([$request->governorate_id]);
         }
-        $bloodTypes = $request->user()->bloodTypes()->value('id');
-        $governorates = $request->user()->governorates()->value('id');
+        $bloodTypes = $request->user()->bloodTypes()->pluck('id')->toArray();
+        $governorates = $request->user()->governorates()->pluck('id')->toArray();
         return responseJson('1','success',[
             'blood_types' => $bloodTypes,
             'governorates' => $governorates
@@ -156,7 +156,7 @@ class AuthController extends Controller
     }
 
     public function registerToken(Request $request){
-        $validator = $request->validator()->make($request->all(),[
+        $validator = validator()->make($request->all(),[
             'token' => 'required',
             'type' => 'required|In:android,ios'
         ]);
@@ -170,7 +170,7 @@ class AuthController extends Controller
     }
 
     public function removeToken(Request $request){
-        $validator = $request->validator()->make($request->all(),[
+        $validator = validator()->make($request->all(),[
             'token' => 'required'
         ]);
         if($validator->fails()){

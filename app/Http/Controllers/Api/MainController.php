@@ -11,6 +11,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DonationRequest;
+use App\Models\Token;
 use Illuminate\Support\Facades\Redis;
 
 class MainController extends Controller
@@ -94,10 +95,30 @@ class MainController extends Controller
         $donationRequest = DonationRequest::create($request->all());
         $clientsIds = $donationRequest->governorate->clients()->whereHas('bloodTypes',function($q) use($request){
             $q->where('blood_type_id',$request->blood_type_id);
-        })->value('id');
+        })->pluck('id')->toArray();
 
-        return response()->json($clientsIds);
+        if(count($clientsIds)){
+            $notification = Notification::create([
+                'title' => 'New Request !',
+                'content' => 'help save human life near you',
+                'donation_request_id' => $donationRequest->id
+            ]);
+            $notification->clients()->attach($clientsIds);
+
+            $tokens = Token::whereIn('client_id',$clientsIds)->pluck('token')->toArray();
+            if(count($tokens)){
+                $title = $notification->title;
+                $content = $notification->content;
+                $date = [
+                    'donation_request_id' => $notification->donation_request_id
+                ];
+            }
+
+            
+        }
     }
+
+
     public function getDonationRequest(Request $request){
         $donationRequests = DonationRequest::where(function($query) use($request){
             if($request->has('governorate_id')){

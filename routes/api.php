@@ -43,5 +43,8 @@ Route::group(['prefix' => 'v1'],function(){
         Route::get('/get-favourites',[MainController::class,'getFavourites']);
         Route::post('/donation-requests',[MainController::class,'addDonationRequest']);
         Route::get('/donation-requests',[MainController::class,'getDonationRequest']);
+
+        Route::post('/generateDeviceToken',[AuthController::class,'registerToken']);
+        Route::post('/removeDeviceToken',[AuthController::class,'removeToken']);
     });
 });

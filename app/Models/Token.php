@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Token extends Model
 {
     use HasFactory;
+    protected $fillable = ['token','type','client_id'];
 
     public function client()
     {
