@@ -39,5 +39,9 @@ Route::group(['prefix' => 'v1'],function(){
         Route::get('/blood-types',[MainController::class,'bloodTypes']);
         Route::get('/categories',[MainController::class,'categories']);
         Route::get('/settings',[MainController::class,'settings']);
+        Route::post('/toggle-favourite',[MainController::class,'toggleFavourite']);
+        Route::get('/get-favourites',[MainController::class,'getFavourites']);
+        Route::post('/donation-requests',[MainController::class,'addDonationRequest']);
+        Route::get('/donation-requests',[MainController::class,'getDonationRequest']);
     });
 });

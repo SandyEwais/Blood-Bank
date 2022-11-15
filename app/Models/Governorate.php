@@ -21,4 +21,9 @@ class Governorate extends Model
         return $this->belongsToMany('App\Models\Client');
     }
 
+    public function donationRequests()
+    {
+        return $this->hasMany('App\Models\DonationRequest');
+    }
+
 }

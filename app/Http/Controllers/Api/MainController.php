@@ -10,6 +10,8 @@ use App\Models\Governorate;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DonationRequest;
+use Illuminate\Support\Facades\Redis;
 
 class MainController extends Controller
 {
@@ -26,8 +28,8 @@ class MainController extends Controller
         $governorates = Governorate::all();
         return responseJson('1','success',$governorates);
     }
-    public function articles(Request $request, Article $article){
-        $articles = Article::where(function($query) use($request,$article){
+    public function articles(Request $request){
+        $articles = Article::where(function($query) use($request){
             if($request->has('search')){
                 $query->filter(request(['search']));
             }
@@ -58,8 +60,57 @@ class MainController extends Controller
         }
     }
 
-    public function notifications(){
-        $notifications = Notification::paginate(10);
+    public function notifications(Request $request){
+        $notifications = $request->user()->notifications();
         return responseJson('1','success',$notifications);
+    }
+
+    public function toggleFavourite(Request $request){
+        $article = $request->user()->articles()->toggle($request->article_id);
+        return responseJson('1','success',$article);
+    }
+
+    public function getFavourites(Request $request){
+        $articles = $request->user()->articles;
+        return responseJson('1','success',$articles);
+    }
+
+    public function addDonationRequest(Request $request){
+        $validator = validator()->make($request->all(),[
+            'patient_name' => 'required',
+            'patient_age' => 'required',
+            'blood_type_id' => 'required',
+            'blood_bags' => 'required',
+            'hospital_name' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'city_id' => 'required',
+            'governorate_id' => 'required',
+            'patient_phone' => 'required'
+        ]);
+        if($validator->fails()){
+            return responseJson('0','failure',$validator->errors());
+        }
+        $donationRequest = DonationRequest::create($request->all());
+        $clientsIds = $donationRequest->governorate->clients()->whereHas('bloodTypes',function($q) use($request){
+            $q->where('blood_type_id',$request->blood_type_id);
+        })->value('id');
+
+        return response()->json($clientsIds);
+    }
+    public function getDonationRequest(Request $request){
+        $donationRequests = DonationRequest::where(function($query) use($request){
+            if($request->has('governorate_id')){
+                $query->where('governorate_id',$request->governorate_id);
+            }
+            if($request->has('blood_type_id')){
+                $query->where('blood_type_id',$request->blood_type_id); 
+            }
+            if($request->has('donation_request_id')){
+                $query->where('id',$request->donation_request_id); 
+            }
+        })->latest()->get();
+        return responseJson('1','success',$donationRequests);
+        
     }
 }

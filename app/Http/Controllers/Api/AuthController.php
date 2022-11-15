@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPassword;
 use App\Models\Notification;
+use App\Models\Token;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -35,6 +36,9 @@ class AuthController extends Controller
         $client = Client::create($request->all());
         $client->api_token = Str::random(60);
         $client->save();
+        
+        $client->bloodTypes()->attach($client->blood_type_id);
+        $client->governorates()->attach($client->city->governorate_id);
         return responseJson('1','success',[
             'client' => $client,
             'api_token' =>$client->api_token
@@ -137,6 +141,43 @@ class AuthController extends Controller
     }
 
     public function notificationsSettings(Request $request){
+        if($request->has('blood_type_id')){
+            $request->user()->bloodTypes()->sync([$request->blood_type_id]);
+        }
+        if($request->has('governorate_id')){
+            $request->user()->governorates()->sync([$request->governorate_id]);
+        }
+        $bloodTypes = $request->user()->bloodTypes()->value('id');
+        $governorates = $request->user()->governorates()->value('id');
+        return responseJson('1','success',[
+            'blood_types' => $bloodTypes,
+            'governorates' => $governorates
+        ]);
+    }
+
+    public function registerToken(Request $request){
+        $validator = $request->validator()->make($request->all(),[
+            'token' => 'required',
+            'type' => 'required|In:android,ios'
+        ]);
+        if($validator->fails()){
+            return responseJson('0','failure',$validator->errors());
+        }
+        Token::where('token',$request->token)->delete();
+        $request->user()->tokens()->create($request->all());
+        return responseJson('1','success');
+
+    }
+
+    public function removeToken(Request $request){
+        $validator = $request->validator()->make($request->all(),[
+            'token' => 'required'
+        ]);
+        if($validator->fails()){
+            return responseJson('0','failure',$validator->errors());
+        }
+        Token::where('token',$request->token)->delete();
+        return responseJson('1','success');
         
     }
 

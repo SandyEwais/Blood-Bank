@@ -35,6 +35,10 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\ContactMessage');
     }
+    public function tokens()
+    {
+        return $this->hasMany('App\Models\Token');
+    }
 
     public function bloodTypes()
     {

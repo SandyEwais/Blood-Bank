@@ -11,6 +11,7 @@ class BloodType extends Model
     public $timestamps = true;
     protected $fillable = array('name');
 
+    //for personal blood type
     public function clients()
     {
         return $this->hasMany('App\Models\Client');
@@ -21,6 +22,7 @@ class BloodType extends Model
         return $this->hasMany('App\Models\DonationRequest');
     }
 
+    //for blood types notifications
     public function notificationClients()
     {
         return $this->belongsToMany('App\Models\Client');
