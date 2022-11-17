@@ -163,10 +163,9 @@ class AuthController extends Controller
         if($validator->fails()){
             return responseJson('0','failure',$validator->errors());
         }
-        Token::where('token',$request->token)->delete();
+        Token::where('client_id',$request->user()->id)->delete();
         $request->user()->tokens()->create($request->all());
         return responseJson('1','success');
-
     }
 
     public function removeToken(Request $request){

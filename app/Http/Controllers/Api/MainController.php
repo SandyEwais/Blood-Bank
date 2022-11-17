@@ -62,7 +62,7 @@ class MainController extends Controller
     }
 
     public function notifications(Request $request){
-        $notifications = $request->user()->notifications();
+        $notifications = $request->user()->notifications()->latest()->paginate(2);
         return responseJson('1','success',$notifications);
     }
 
@@ -72,7 +72,7 @@ class MainController extends Controller
     }
 
     public function getFavourites(Request $request){
-        $articles = $request->user()->articles;
+        $articles = $request->user()->articles()->latest()->paginate(2);
         return responseJson('1','success',$articles);
     }
 
@@ -109,17 +109,20 @@ class MainController extends Controller
             if(count($tokens)){
                 $title = $notification->title;
                 $content = $notification->content;
-                $date = [
+                $data = [
                     'donation_request_id' => $notification->donation_request_id
                 ];
+                $send = notifyByFirebase($title, $content, $tokens, $data);
+                info('firebase result:' . $send);
             }
+            return responseJson('1','success',$send);
 
             
         }
     }
 
 
-    public function getDonationRequest(Request $request){
+    public function donationRequests(Request $request){
         $donationRequests = DonationRequest::where(function($query) use($request){
             if($request->has('governorate_id')){
                 $query->where('governorate_id',$request->governorate_id);
@@ -130,7 +133,7 @@ class MainController extends Controller
             if($request->has('donation_request_id')){
                 $query->where('id',$request->donation_request_id); 
             }
-        })->latest()->get();
+        })->latest()->paginate(3);
         return responseJson('1','success',$donationRequests);
         
     }

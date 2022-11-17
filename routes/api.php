@@ -29,6 +29,7 @@ Route::group(['prefix' => 'v1'],function(){
     Route::post('/forgot-password',[AuthController::class,'forgotPassword']);
     Route::post('/reset-password',[AuthController::class,'resetPassword']);
 
+    //middleware under api_token
     Route::group(['middleware' => 'auth:api'],function(){
         Route::post('/profile',[AuthController::class,'profile']);
         Route::get('/notifications',[MainController::class,'notifications']);
@@ -42,9 +43,9 @@ Route::group(['prefix' => 'v1'],function(){
         Route::post('/toggle-favourite',[MainController::class,'toggleFavourite']);
         Route::get('/get-favourites',[MainController::class,'getFavourites']);
         Route::post('/donation-requests',[MainController::class,'addDonationRequest']);
-        Route::get('/donation-requests',[MainController::class,'getDonationRequest']);
+        Route::get('/donation-requests',[MainController::class,'donationRequests']);
 
-        Route::post('/generateDeviceToken',[AuthController::class,'registerToken']);
+        Route::post('/registerDeviceToken',[AuthController::class,'registerToken']);
         Route::post('/removeDeviceToken',[AuthController::class,'removeToken']);
     });
 });
