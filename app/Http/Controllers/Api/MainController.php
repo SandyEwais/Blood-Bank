@@ -115,7 +115,7 @@ class MainController extends Controller
                 $send = notifyByFirebase($title, $content, $tokens, $data);
                 info('firebase result:' . $send);
             }
-            return responseJson('1','success',$send);
+            return responseJson('1','success',$donationRequest);
 
             
         }
