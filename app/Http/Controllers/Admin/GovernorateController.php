@@ -26,7 +26,7 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.governorates.create');
     }
 
     /**
@@ -37,7 +37,11 @@ class GovernorateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:governorates'
+        ]);
+        Governorate::create($request->all());
+        return redirect()->route('governorates.index')->with('message','Governorate Added Successfully');
     }
 
     /**
@@ -57,9 +61,9 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Governorate $governorate)
     {
-        //
+        dd($governorate);
     }
 
     /**
