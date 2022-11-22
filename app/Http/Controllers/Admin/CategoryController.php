@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Governorate;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class GovernorateController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class GovernorateController extends Controller
      */
     public function index()
     {
-        $governorates = Governorate::paginate(20);
-        return view('admin.governorates.index',compact('governorates'));
+        $categories = Category::paginate(20);
+        return view('admin.categories.index',compact('categories'));
     }
 
     /**
@@ -26,7 +26,7 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        return view('admin.governorates.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -38,10 +38,10 @@ class GovernorateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:governorates'
+            'name' => 'required|unique:categories'
         ]);
-        Governorate::create($request->all());
-        return redirect()->route('governorates.index')->with('message','Governorate Added Successfully');
+        Category::create($request->all());
+        return redirect()->route('categories.index')->with('message','Category Added Successfully');
     }
 
     /**
@@ -61,10 +61,10 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Governorate $governorate)
+    public function edit(Category $category)
     {
-        return view('admin.governorates.edit',[
-            'governorate' => $governorate
+        return view('admin.categories.edit',[
+            'category' => $category
         ]);
     }
 
@@ -75,14 +75,13 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Governorate $governorate)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|unique:governorates'
+            'name' => 'required|unique:categories'
         ]);
-        $governorate->update($request->all());
-        return redirect()->route('governorates.index')->with('message','Governorate Updated Successfully');
-        
+        $category->update($request->all());
+        return redirect()->route('categories.index')->with('message','Category Updated Successfully');
     }
 
     /**
@@ -91,9 +90,9 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Governorate $governorate)
+    public function destroy(Category $category)
     {
-        $governorate->delete();
-        return redirect()->route('governorates.index')->with('message','Governorate Deleted Successfully');
+        $category->delete();
+        return redirect()->route('categories.index')->with('message','Category Deleted Successfully');
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Governorate;
+use App\Models\City;
 use Illuminate\Http\Request;
 
-class GovernorateController extends Controller
+class CityContoller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class GovernorateController extends Controller
      */
     public function index()
     {
-        $governorates = Governorate::paginate(20);
-        return view('admin.governorates.index',compact('governorates'));
+        $cities = City::paginate(20);
+        return view('admin.cities.index',compact('cities'));
     }
 
     /**
@@ -26,7 +26,7 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        return view('admin.governorates.create');
+        return view('admin.cities.create');
     }
 
     /**
@@ -38,10 +38,10 @@ class GovernorateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:governorates'
+            'name' => 'required|unique:cities'
         ]);
-        Governorate::create($request->all());
-        return redirect()->route('governorates.index')->with('message','Governorate Added Successfully');
+        City::create($request->all());
+        return redirect()->route('cities.index')->with('message','City Added Successfully');
     }
 
     /**
@@ -61,10 +61,10 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Governorate $governorate)
+    public function edit(City $city)
     {
-        return view('admin.governorates.edit',[
-            'governorate' => $governorate
+        return view('admin.cities.edit',[
+            'city' => $city
         ]);
     }
 
@@ -75,14 +75,13 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Governorate $governorate)
+    public function update(Request $request, City $city)
     {
         $request->validate([
-            'name' => 'required|unique:governorates'
+            'name' => 'required|unique:cities'
         ]);
-        $governorate->update($request->all());
-        return redirect()->route('governorates.index')->with('message','Governorate Updated Successfully');
-        
+        $city->update($request->all());
+        return redirect()->route('cities.index')->with('message','City Updated Successfully');
     }
 
     /**
@@ -91,9 +90,9 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Governorate $governorate)
+    public function destroy(City $city)
     {
-        $governorate->delete();
-        return redirect()->route('governorates.index')->with('message','Governorate Deleted Successfully');
+        $city->delete();
+        return redirect()->route('cities.index')->with('message','City Deleted Successfully');
     }
 }

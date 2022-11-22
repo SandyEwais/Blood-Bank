@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 @section('page-name')
-    Governorates
+    cities
 @endsection
 @section('content')
     <!-- Default box -->
@@ -15,8 +15,8 @@
                     {{session('message')}}
                 </div>
             @endif
-            <a class="btn btn-info" href="{{route('governorates.create')}}"><i class="fa fa-plus"></i> New Governorate</a>
-            @if (count($governorates))
+            <a class="btn btn-info" href="{{route('cities.create')}}"><i class="fa fa-plus"></i> New city</a>
+            @if (count($cities))
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                <thead>
@@ -28,16 +28,16 @@
                     </tr>
                </thead>
                 <tbody>
-                    @foreach ($governorates as $governorate)
+                    @foreach ($cities as $city)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$governorate->name}}</td>
+                            <td>{{$city->name}}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{route('governorates.edit',['governorate' => $governorate->id])}}"><i class="fa fa-edit"></i> Edit</a>
+                                <a class="btn btn-info btn-sm" href="{{route('cities.edit',['city' => $city->id])}}"><i class="fa fa-edit"></i> Edit</a>
                             </td>
                             <td>
                                 {!! Form::open([
-                                    'route' => ['governorates.destroy',$governorate->id],
+                                    'route' => ['cities.destroy',$city->id],
                                     'method' => 'delete'
                                 ]) !!}
                                 {!! Form::button('<i class="fas fa-trash-alt"></i> Delete', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) !!}

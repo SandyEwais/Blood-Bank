@@ -192,17 +192,25 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon far fa-circle"></i>
               <p>
-                Posts
+                Article
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                <a href="{{route('articles.index')}}" class="nav-link">
+                  <i class="far fa-newspaper nav-icon"></i>
+                  <p>Articles</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('categories.index')}}" class="nav-link">
+                  <i class="fas fa-boxes nav-icon"></i>
+                  <p>Categories</p>
                 </a>
               </li>
             </ul>
@@ -216,10 +224,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
+            <a href="{{route('cities.index')}}" class="nav-link">
+              <i class="nav-icon far fa-building"></i>
               <p>
-                Settings
+                Cities
               </p>
             </a>
           </li>

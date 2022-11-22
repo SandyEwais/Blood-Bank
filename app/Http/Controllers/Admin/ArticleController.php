@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Governorate;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
-class GovernorateController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class GovernorateController extends Controller
      */
     public function index()
     {
-        $governorates = Governorate::paginate(20);
-        return view('admin.governorates.index',compact('governorates'));
+        $articles = Article::paginate(20);
+        return view('admin.articles.index',compact('articles'));
     }
 
     /**
@@ -26,7 +26,7 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        return view('admin.governorates.create');
+        return view('admin.articles.create');
     }
 
     /**
@@ -37,11 +37,7 @@ class GovernorateController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:governorates'
-        ]);
-        Governorate::create($request->all());
-        return redirect()->route('governorates.index')->with('message','Governorate Added Successfully');
+        
     }
 
     /**
@@ -50,9 +46,11 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        //
+        return view('admin.articles.show',[
+            'article' => $article
+        ]);
     }
 
     /**
@@ -61,10 +59,10 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Governorate $governorate)
+    public function edit(Article $article)
     {
-        return view('admin.governorates.edit',[
-            'governorate' => $governorate
+        return view('admin.articles.edit',[
+            'article' => $article
         ]);
     }
 
@@ -75,14 +73,9 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Governorate $governorate)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|unique:governorates'
-        ]);
-        $governorate->update($request->all());
-        return redirect()->route('governorates.index')->with('message','Governorate Updated Successfully');
-        
+        //
     }
 
     /**
@@ -91,9 +84,8 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Governorate $governorate)
+    public function destroy($id)
     {
-        $governorate->delete();
-        return redirect()->route('governorates.index')->with('message','Governorate Deleted Successfully');
+        //
     }
 }
