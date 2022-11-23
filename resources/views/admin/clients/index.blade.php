@@ -1,12 +1,28 @@
 
 @extends('layouts.app')
 @section('page-name')
-    categories
+    Clients
 @endsection
 @section('content')
+
     <!-- Default box -->
     <div class="card">
+        
         <div class="card-body">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form action="{{route('clients.index')}}">
+                        <div class="input-group">
+                            <input type="search" name="search" class="form-control form-control-lg" placeholder="Type your keywords here">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-lg btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             
             @if (session('message'))
             <div class="alert alert-success alert-dismissible">
@@ -15,29 +31,36 @@
                     {{session('message')}}
                 </div>
             @endif
-            <a class="btn btn-info" href="{{route('categories.create')}}"><i class="fa fa-plus"></i> New category</a>
-            @if (count($categories))
+            @if (count($clients))
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Edit</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Blood Type</th>
+                        <th>Birth date</th>
+                        <th>City</th>
+                        <th>Last Donation Date</th>
                         <th>Delete</th>
                     </tr>
                </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($clients as $client)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$category->name}}</td>
-                            <td>
-                                <a class="btn btn-secondary btn-sm" href="{{route('categories.edit',['category' => $category->id])}}"><i class="fa fa-edit"></i> Edit</a>
-                            </td>
+                            <td>{{$client->name}}</td>
+                            <td>{{$client->phone}}</td>
+                            <td>{{$client->email}}</td>
+                            <td>{{$client->bloodType->name}}</td>
+                            <td>{{$client->d_o_b}}</td>
+                            <td>{{$client->city->name}}</td>
+                            <td>{{$client->last_donation_date}}</td>
                             <td>
                                 {!! Form::open([
-                                    'route' => ['categories.destroy',$category->id],
+                                    'route' => ['clients.destroy',$client->id],
                                     'method' => 'delete'
                                 ]) !!}
                                 {!! Form::button('<i class="fas fa-trash-alt"></i> Delete', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) !!}

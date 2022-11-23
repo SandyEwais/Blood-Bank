@@ -35,13 +35,13 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$article->title}}</td>
-                            <td>{{$article->content}}</td>
+                            <td>{{Str::limit($article->content,50)}}</td>
                             <td>{{$article->category->name}}</td>
                             <td>
                                 <a class="btn btn-info btn-sm" href="{{route('articles.show',['article' => $article->id])}}"><i class="fa fa-eye"></i> View</a>
                             </td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{route('articles.edit',['article' => $article->id])}}"><i class="fa fa-edit"></i> Edit</a>
+                                <a class="btn btn-secondary btn-sm" href="{{route('articles.edit',['article' => $article->id])}}"><i class="fa fa-edit"></i> Edit</a>
                             </td>
                             <td>
                                 {!! Form::open([

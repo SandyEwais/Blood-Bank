@@ -78,7 +78,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|unique:categories'
+            'name' => 'required'
         ]);
         $category->update($request->all());
         return redirect()->route('categories.index')->with('message','Category Updated Successfully');

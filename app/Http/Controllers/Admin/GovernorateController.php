@@ -78,7 +78,7 @@ class GovernorateController extends Controller
     public function update(Request $request, Governorate $governorate)
     {
         $request->validate([
-            'name' => 'required|unique:governorates'
+            'name' => 'required'
         ]);
         $governorate->update($request->all());
         return redirect()->route('governorates.index')->with('message','Governorate Updated Successfully');

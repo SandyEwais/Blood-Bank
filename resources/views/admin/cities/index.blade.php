@@ -23,6 +23,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Governorate</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -32,8 +33,9 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$city->name}}</td>
+                            <td>{{$city->governorate->name}}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{route('cities.edit',['city' => $city->id])}}"><i class="fa fa-edit"></i> Edit</a>
+                                <a class="btn btn-secondary btn-sm" href="{{route('cities.edit',['city' => $city->id])}}"><i class="fa fa-edit"></i> Edit</a>
                             </td>
                             <td>
                                 {!! Form::open([

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model 
 {
-
+    use Searchable;
+    public $columns = ['phone', 'password', 'pin_code', 'name', 'email', 'd_o_b', 'last_donation_date', 'blood_type_id', 'city_id'];
     protected $table = 'clients';
     public $timestamps = true;
     protected $fillable = array('phone', 'password', 'pin_code', 'name', 'email', 'd_o_b', 'last_donation_date', 'blood_type_id', 'city_id');
@@ -14,6 +16,7 @@ class Client extends Model
     protected $hidden = [
         'password',
         'api_token',
+        'pin_code'
     ];
 
     public function bloodType()

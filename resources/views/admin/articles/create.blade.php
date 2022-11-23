@@ -1,15 +1,14 @@
-
+@inject('model', 'App\Models\Article')
 @extends('layouts.app')
 @section('page-name')
-    Edit Article
+    Create New Article
 @endsection
 @section('content')
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
-            {!! Form::model($article, [
-                'route' => ['articles.update',$article->id],
-                'method' => 'put',
+            {!! Form::model($model, [
+                'route' => 'articles.store',
                 'enctype' => 'multipart/form-data'
             ]) !!}
             <div class="form-group">
@@ -32,7 +31,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('category_id', 'Category') !!}
-                {!! Form::select('category_id', [$categories->pluck('name','id')->toArray()],$article->category->name, [
+                {!! Form::select('category_id', $categories->pluck('name','id')->toArray(),null, [
                     'class' => 'form-control'
                 ]) !!}
                 @error('category_id')

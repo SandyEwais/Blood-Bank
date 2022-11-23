@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 
 class CityContoller extends Controller
@@ -26,7 +27,9 @@ class CityContoller extends Controller
      */
     public function create()
     {
-        return view('admin.cities.create');
+        return view('admin.cities.create',[
+            'governorates' => Governorate::get(['id','name'])
+        ]);
     }
 
     /**
@@ -38,7 +41,8 @@ class CityContoller extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:cities'
+            'name' => 'required|unique:cities',
+            'governorate_id' => 'required'
         ]);
         City::create($request->all());
         return redirect()->route('cities.index')->with('message','City Added Successfully');
@@ -64,7 +68,8 @@ class CityContoller extends Controller
     public function edit(City $city)
     {
         return view('admin.cities.edit',[
-            'city' => $city
+            'city' => $city,
+            'governorates' => Governorate::get(['id','name'])
         ]);
     }
 
@@ -78,7 +83,8 @@ class CityContoller extends Controller
     public function update(Request $request, City $city)
     {
         $request->validate([
-            'name' => 'required|unique:cities'
+            'name' => 'required',
+            'governorate_id' => 'required'
         ]);
         $city->update($request->all());
         return redirect()->route('cities.index')->with('message','City Updated Successfully');

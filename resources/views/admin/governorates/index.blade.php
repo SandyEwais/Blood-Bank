@@ -33,7 +33,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$governorate->name}}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{route('governorates.edit',['governorate' => $governorate->id])}}"><i class="fa fa-edit"></i> Edit</a>
+                                <a class="btn btn-secondary btn-sm" href="{{route('governorates.edit',['governorate' => $governorate->id])}}"><i class="fa fa-edit"></i> Edit</a>
                             </td>
                             <td>
                                 {!! Form::open([

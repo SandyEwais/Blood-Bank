@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -26,7 +28,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.articles.create');
+        return view('admin.articles.create',[
+            'categories' => Category::get(['id','name'])
+        ]);
     }
 
     /**
@@ -37,7 +41,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+        ]);
+        $data['image'] = $request->file('image')->store('images','public');
+        Article::create($data);
+        return redirect()->route('articles.index')->with('message','Article Updated Successfully');
     }
 
     /**
@@ -62,7 +74,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         return view('admin.articles.edit',[
-            'article' => $article
+            'article' => $article,
+            'categories' => Category::get(['id','name'])
         ]);
     }
 
@@ -73,9 +86,17 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+        ]);
+        $data['image'] = $request->file('image')->store('images','public');
+        $article->update($data);
+        return redirect()->route('articles.index')->with('message','Article Updated Successfully');
     }
 
     /**
@@ -84,8 +105,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('articles.index')->with('message','Article Deleted successfully');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityContoller;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\GovernorateController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('dashboard');
 Route::resource('governorates',GovernorateController::class);
 Route::resource('cities',CityContoller::class);
 Route::resource('categories',CategoryController::class);
 Route::resource('articles',ArticleController::class);
+Route::resource('clients',ClientController::class)->only('index','destroy');
 

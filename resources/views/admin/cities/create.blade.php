@@ -19,6 +19,16 @@
                     <p class="text-danger">{{$message}}</p>
                 @enderror
             </div>
+            <div class="form-group">
+                {!! Form::label('governorate_id', 'Governorate') !!}
+                {!! Form::select('governorate_id', $governorates->pluck('name','id')->toArray(), null, [
+                    'class' => 'form-control',
+                    'placeholder' => "pick"
+                ]) !!}
+                @error('governorate_id')
+                    <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
             
             <div class="form-group">
                 {!! Form::submit('Submit', [
