@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('category_id', 'Category') !!}
-                {!! Form::select('category_id', [$categories->pluck('name','id')->toArray()],$article->category->name, [
+                {!! Form::select('category_id', $categories->pluck('name','id')->toArray(),null, [
                     'class' => 'form-control'
                 ]) !!}
                 @error('category_id')

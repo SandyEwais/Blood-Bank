@@ -247,6 +247,30 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('donation-requests.index')}}" class="nav-link">
+              <i class="nav-icon	fas fa-comment-medical"></i>
+              <p>
+                Donation Requests
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('contact-messages.index')}}" class="nav-link">
+              <i class="nav-icon	fas fa-envelope-square"></i>
+              <p>
+                Contact Messages
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('settings.index')}}" class="nav-link">
+              <i class="nav-icon	fas fa-cog"></i>
+              <p>
+                Settings
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -305,7 +329,5 @@
 <script src="{{asset('adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminLte/dist/js/adminlte.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('adminLte/dist/js/demo.js')}}"></script>
 </body>
 </html>

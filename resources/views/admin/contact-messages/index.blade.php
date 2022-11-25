@@ -1,17 +1,15 @@
 
 @extends('layouts.app')
 @section('page-name')
-    Clients
+    Contact Messages
 @endsection
 @section('content')
-
     <!-- Default box -->
     <div class="card">
-        
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="{{route('clients.index')}}">
+                    <form action="{{route('contact-messages.index')}}">
                         <div class="input-group">
                             <input type="search" name="search" class="form-control form-control-lg" placeholder="Type your keywords here">
                             <div class="input-group-append">
@@ -23,6 +21,7 @@
                     </form>
                 </div>
             </div>
+
             
             @if (session('message'))
             <div class="alert alert-success alert-dismissible">
@@ -31,36 +30,28 @@
                     {{session('message')}}
                 </div>
             @endif
-            @if (count($clients))
+            @if (count($contactMessages))
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Blood Type</th>
-                        <th>Birth date</th>
-                        <th>City</th>
-                        <th>Last Donation Date</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Client</th>
                         <th>Delete</th>
                     </tr>
                </thead>
                 <tbody>
-                    @foreach ($clients as $client)
+                    @foreach ($contactMessages as $contactMessage)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$client->name}}</td>
-                            <td>{{$client->phone}}</td>
-                            <td>{{$client->email}}</td>
-                            <td>{{$client->bloodType->name}}</td>
-                            <td>{{$client->d_o_b}}</td>
-                            <td>{{$client->city->name}}</td>
-                            <td>{{$client->last_donation_date}}</td>
+                            <td>{{$contactMessage->title}}</td>
+                            <td>{{$contactMessage->content}}</td>
+                            <td><a href="{{route('clients.index',['search' => $contactMessage->client->email])}}">{{$contactMessage->client->name}}</a></td>
                             <td>
                                 {!! Form::open([
-                                    'route' => ['clients.destroy',$client->id],
+                                    'route' => ['contact-messages.destroy',$contactMessage->id],
                                     'method' => 'delete'
                                 ]) !!}
                                 {!! Form::button('<i class="fas fa-trash-alt"></i> Delete', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) !!}
@@ -80,5 +71,5 @@
         </div>
       </div>
       <!-- /.card -->
-      {{ $clients->links() }}
+      {{ $contactMessages->links() }}
 @endsection
