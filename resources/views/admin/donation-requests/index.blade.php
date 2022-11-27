@@ -52,7 +52,7 @@
                             <td>{{$donationRequest->hospital_name}}</td>
                             <td>{{$donationRequest->governorate->name}}</td>
                             <td>
-                                <a class="link-info" href="{{route('donation-requests.index',['search' => $donationRequest->client->email])}}">{{$donationRequest->client->phone}}</a>
+                                <a class="link-info" href="{{route('clients.index',['search' => $donationRequest->client->email])}}">{{$donationRequest->client->phone}}</a>
                             </td>
                             <td>
                                 <a class="btn btn-info btn-sm" href="{{route('donation-requests.show',['donation_request' => $donationRequest->id])}}"><i class="fa fa-eye"></i> View</a>
