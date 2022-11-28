@@ -15,8 +15,9 @@
                     {{session('message')}}
                 </div>
             @endif
-            <a class="btn btn-info" href="{{route('articles.create')}}"><i class="fa fa-plus"></i> New article</a>
+            
             @if (count($articles))
+            <a class="btn btn-info" href="{{route('articles.create')}}"><i class="fa fa-plus"></i> New article</a>
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                <thead>
@@ -61,6 +62,7 @@
                 <div class="alert alert-warning alert-dismissible">
                     <h5><i class="icon fas fa-exclamation-triangle"></i> No data found</h5>
                 </div>
+                <a class="btn btn-info" href="{{route('articles.create')}}"><i class="fa fa-plus"></i> New article</a>
             @endif
         </div>
       </div>

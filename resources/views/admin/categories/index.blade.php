@@ -15,8 +15,9 @@
                     {{session('message')}}
                 </div>
             @endif
-            <a class="btn btn-info" href="{{route('categories.create')}}"><i class="fa fa-plus"></i> New category</a>
+            
             @if (count($categories))
+            <a class="btn btn-info" href="{{route('categories.create')}}"><i class="fa fa-plus"></i> New category</a>
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                <thead>
@@ -53,6 +54,7 @@
                 <div class="alert alert-warning alert-dismissible">
                     <h5><i class="icon fas fa-exclamation-triangle"></i> No data found</h5>
                 </div>
+                <a class="btn btn-info" href="{{route('categories.create')}}"><i class="fa fa-plus"></i> New category</a>
             @endif
         </div>
       </div>

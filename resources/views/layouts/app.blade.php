@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,7 +174,7 @@
             {!! Form::open([
               'route' => 'logout'
             ]) !!}
-            {!! Form::button('<i class="fas fa-trash-alt"></i> Logout', ['class' => 'nav-link','type' => 'submit']) !!}
+            {!! Form::button('<i class="fas fa-power-off"></i> Logout', ['class' => 'nav-link','type' => 'submit']) !!}
             {!! Form::close() !!}
           </li>
           @endauth
@@ -235,5 +236,6 @@
 <script src="{{asset('adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminLte/dist/js/adminlte.min.js')}}"></script>
+@stack('selectAll');
 </body>
 </html>

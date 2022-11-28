@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::middleware('auth')->group(function(){
-    Route::get('/', function () {
+    Route::get('/dashboard', function () {
         return view('welcome');
     })->name('dashboard');
     Route::resource('governorates',GovernorateController::class);
