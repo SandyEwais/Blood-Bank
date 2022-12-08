@@ -1,5 +1,5 @@
 @inject('model', 'App\Models\City')
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('page-name')
     Create New City
 @endsection

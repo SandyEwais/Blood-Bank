@@ -24,6 +24,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Activate</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -33,6 +34,18 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$user->name}}</td>
+                            <td>
+                                <div class="form-group">
+                                    <form method="POST" action="{{route('activate',$user->id)}}">
+                                        @csrf
+                                        @if ($user->is_active == 0)
+                                        <button name="is_active" value="1" type="submit" class="btn btn-success">Activate</button>
+                                        @else
+                                        <button name="is_active" value="0" type="submit" class="btn btn-danger">Deactivate</button>
+                                        @endif
+                                    </form>
+                                </div>
+                            </td>
                             <td>
                                 <a class="btn btn-secondary btn-sm" href="{{route('users.edit',['user' => $user->id])}}"><i class="fa fa-edit"></i> Edit</a>
                             </td>
@@ -44,6 +57,7 @@
                                 {!! Form::button('<i class="fas fa-trash-alt"></i> Delete', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) !!}
                                 {!! Form::close() !!}
                             </td>
+                            
                         </tr>
                     @endforeach
                     

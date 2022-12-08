@@ -22,9 +22,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware('auth')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('welcome');
+
+//Front
+
+
+//Admin Dashboard
+Route::group(['middleware' => ['auth','check_permission'],'prefix' => 'admin'],function(){
+    Route::get('/', function () {
+        return view('admin.home');
     })->name('dashboard');
     Route::resource('governorates',GovernorateController::class);
     Route::resource('cities',CityContoller::class);
@@ -35,12 +40,11 @@ Route::middleware('auth')->group(function(){
     Route::resource('donation-requests',DonationRequestController::class)->only('index','show','destroy');
     Route::resource('settings',SettingController::class)->only('index','edit','update');
     Route::resource('roles',RoleController::class);
+    Route::post('/users/{user}/activate',[UserController::class,'activate'])->name('activate');
     Route::resource('users',UserController::class);
+    Route::get('/reset-password',[UserController::class,'reset'])->name('reset');
+    Route::post('/update-password',[UserController::class,'updatePassword'])->name('updatePassword');
 });
-
-
-Route::get('/reset-password',[UserController::class,'reset'])->name('reset');
-Route::post('/update-password',[UserController::class,'update'])->name('update');
 Route::get('/login',[UserController::class,'login'])->name('login');
 Route::post('/authenticate',[UserController::class,'authenticate'])->name('authenticate');
 Route::post('/logout',[UserController::class,'logout'])->name('logout');

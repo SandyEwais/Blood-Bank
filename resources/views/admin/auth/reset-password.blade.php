@@ -9,11 +9,11 @@
         <div class="card card-light card-outline">
         <div class="card-body">
             {!! Form::model($user, [
-                'route' => 'update'
+                'route' => 'updatePassword'
             ]) !!}
             <div class="form-group">
                 {!! Form::label('current_password', 'Current Password') !!}
-                {!! Form::password('current_password', null,[
+                {!! Form::password('current_password',[
                     'class' => 'form-control'
                 ]) !!}
                 @error('current_password')
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('password', 'New Password') !!}
-                {!! Form::password('password', null,[
+                {!! Form::password('password',[
                     'class' => 'form-control'
                 ]) !!}
                 @error('password')
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('password_confirmation', 'Confirm Password') !!}
-                {!! Form::password('password_confirmation', null,[
+                {!! Form::password('password_confirmation',[
                     'class' => 'form-control'
                 ]) !!}
                 @error('password_confirmation')

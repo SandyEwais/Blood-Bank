@@ -1,4 +1,4 @@
-@inject('model', 'App\Models\User')
+{{-- {{dd($selectedRoles)}} --}}
 @inject('roles', 'Spatie\Permission\Models\Role')
 @php
     $roles = $roles->pluck('name','id')->toArray();
@@ -12,8 +12,9 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
-            {!! Form::model($model, [
-                'route' => 'users.store'
+            {!! Form::model($user, [
+                'route' => ['users.update',$user->id],
+                'method' => 'put'
             ]) !!}
             <div class="form-group">
                 {!! Form::label('name', 'Name') !!}
@@ -35,7 +36,7 @@
             </div>
             {!! Form::label('roles', 'Roles') !!}
             <div class="form-group">
-                {!! Form::select('roles[]', $roles, '', [
+                {!! Form::select('roles[]', $roles, $selectedRoles, [
                     'class' => 'form-control',
                     'multiple' => 'multiple'
                 ]) !!}

@@ -1,5 +1,5 @@
 @inject('permissions', 'Spatie\Permission\Models\Permission')
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('page-name')
     Edit Role
 @endsection

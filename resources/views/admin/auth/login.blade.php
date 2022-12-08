@@ -1,5 +1,6 @@
 @inject('user', 'App\Models\User')
-<!DOCTYPE html>
+
+{{-- ************************************** --}}
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="{{asset('adminLte/dist/css/adminlte.min.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
+    
 <!-- Site wrapper -->
 <div class="wrapper">
         <div class="card-body d-flex justify-content-center">
@@ -40,7 +42,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('password', 'Password') !!}
-                            {!! Form::password('password', null,[
+                            {!! Form::password('password',[
                                 'class' => 'form-control'
                             ]) !!}
                             @error('password')
@@ -68,8 +70,8 @@
     <script src="{{asset('adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('adminLte/dist/js/adminlte.min.js')}}"></script>
-    </body>
-    </html>
+</body>
+</html>
 
 
 

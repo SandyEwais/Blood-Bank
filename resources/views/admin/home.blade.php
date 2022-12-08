@@ -1,6 +1,6 @@
 @inject('clients', 'App\Models\Client')
 @inject('requests', 'App\Models\DonationRequest')
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('page-name')
     Dashboard
 @endsection

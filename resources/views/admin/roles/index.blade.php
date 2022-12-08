@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('page-name')
     Roles
 @endsection

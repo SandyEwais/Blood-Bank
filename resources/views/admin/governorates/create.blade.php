@@ -1,5 +1,5 @@
 @inject('model', 'App\Models\Governorate')
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('page-name')
     Create New Governorate
 @endsection

@@ -1,6 +1,9 @@
 @inject('model', 'Spatie\Permission\Models\Role')
 @inject('permissions', 'Spatie\Permission\Models\Permission')
-@extends('layouts.app')
+{{-- $permissions variable is working --}}
+
+
+@extends('admin.layouts.app')
 @section('page-name')
     Create New Role
 @endsection

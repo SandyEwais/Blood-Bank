@@ -70,31 +70,23 @@
               </p>
             </a>
           </li>
+          @can('article-access')
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle"></i>
-              <p>
-                Article
-                <i class="right fas fa-angle-left"></i>
-              </p>
+            <a href="{{route('articles.index')}}" class="nav-link">
+              <i class="far fa-newspaper nav-icon"></i>
+              <p>Articles</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('articles.index')}}" class="nav-link">
-                  <i class="far fa-newspaper nav-icon"></i>
-                  <p>Articles</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('categories.index')}}" class="nav-link">
-                  <i class="fas fa-boxes nav-icon"></i>
-                  <p>Categories</p>
-                </a>
-              </li>
-            </ul>
           </li>
+          @endcan
+          @can('category-access')
+          <li class="nav-item">
+            <a href="{{route('categories.index')}}" class="nav-link">
+              <i class="fas fa-boxes nav-icon"></i>
+              <p>Categories</p>
+            </a>
+          </li>
+          @endcan
+          @can('client-access')
           <li class="nav-item">
             <a href="{{route('clients.index')}}" class="nav-link">
               <i class="nav-icon 	fas fa-users"></i>
@@ -103,6 +95,8 @@
               </p>
             </a>
           </li>
+          @endcan
+          @can('governorate-access')
           <li class="nav-item">
             <a href="{{route('governorates.index')}}" class="nav-link">
               <i class="nav-icon 	fas fa-map-marked"></i>
@@ -111,6 +105,8 @@
               </p>
             </a>
           </li>
+          @endcan
+          @can('city-access')
           <li class="nav-item">
             <a href="{{route('cities.index')}}" class="nav-link">
               <i class="nav-icon far fa-building"></i>
@@ -119,6 +115,8 @@
               </p>
             </a>
           </li>
+          @endcan
+          @can('donationRequest-access')
           <li class="nav-item">
             <a href="{{route('donation-requests.index')}}" class="nav-link">
               <i class="nav-icon	fas fa-comment-medical"></i>
@@ -127,6 +125,9 @@
               </p>
             </a>
           </li>
+          @endcan
+          
+          @can('contactMessage-access')
           <li class="nav-item">
             <a href="{{route('contact-messages.index')}}" class="nav-link">
               <i class="nav-icon	fas fa-envelope-square"></i>
@@ -135,6 +136,9 @@
               </p>
             </a>
           </li>
+          @endcan
+          
+          @can('user-access')
           <li class="nav-item">
             <a href="{{route('users.index')}}" class="nav-link">
               <i class="nav-icon fa fa-user-circle"></i>
@@ -143,6 +147,8 @@
               </p>
             </a>
           </li>
+          @endcan
+          @can('role-access')
           <li class="nav-item">
             <a href="{{route('roles.index')}}" class="nav-link">
               <i class="nav-icon fa fa-user-tag"></i>
@@ -151,6 +157,8 @@
               </p>
             </a>
           </li>
+          @endcan
+          @can('setting-access')
           <li class="nav-item">
             <a href="{{route('settings.index')}}" class="nav-link">
               <i class="nav-icon	fas fa-cog"></i>
@@ -159,6 +167,8 @@
               </p>
             </a>
           </li>
+          @endcan
+          
           
           
           @auth
