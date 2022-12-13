@@ -182,7 +182,7 @@
           </li>
           <li class="nav-item">
             {!! Form::open([
-              'route' => 'logout'
+              'route' => 'user.logout'
             ]) !!}
             {!! Form::button('<i class="fas fa-power-off"></i> Logout', ['class' => 'nav-link','type' => 'submit']) !!}
             {!! Form::close() !!}

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\BloodType;
+use App\Models\Settings;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $settings = Settings::first();
+        view()->share(compact('settings'));
     }
 }
