@@ -10,25 +10,29 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">الرئيسية</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">تسجيل الدخول</li>
+                        <li class="breadcrumb-item active" aria-current="page">تأكيد كلمة المرور الجديدة</li>
                     </ol>
                 </nav>
             </div>
             <div class="signin-form">
                 {!! Form::open([
                     'method' => 'post',
-                    'route' => 'clients.login'
+                    'route' => 'clients.confirm-pin-code'
                 ]) !!}
+                
                     <div class="logo">
                         <img src="{{asset('websiteAssets/imgs/logo.png')}}">
                     </div>
+                    @if (session('message'))
+                        <p class="text-danger">{{session('message')}}</p>
+                    @endif
                     <div class="form-group">
-                        {!! Form::number('phone', null, [
+                        {!! Form::number('pin_code', null, [
                             'class' => 'form-control',
-                            'id' => 'exampleInputEmail1',
-                            'placeholder' => 'الجوال'
+                            'id' => 'exampleInputPassword1',
+                            'placeholder' => 'الكود السري'
                         ]) !!}
-                        @error('phone')
+                        @error('pin_code')
                             <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
@@ -36,30 +40,25 @@
                         {!! Form::password('password', [
                             'class' => 'form-control',
                             'id' => 'exampleInputPassword1',
-                            'placeholder' => 'كلمة المرور'
+                            'placeholder' => 'كلمة المرور الجديدة'
                         ]) !!}
                         @error('password')
                             <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="row options">
-                        <div class="col-md-6 remember">
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">تذكرنى</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 forgot">
-                            <img src="{{asset('websiteAssets/imgs/complain.png')}}">
-                            <a href="{{route('clients.forgot-password')}}">هل نسيت كلمة المرور</a>
-                        </div>
+                    <div class="form-group">
+                        {!! Form::password('password_confirmation', [
+                            'class' => 'form-control',
+                            'id' => 'exampleInputPassword1',
+                            'placeholder' => 'تأكيد كلمة المرور الجديدة'
+                        ]) !!}
+                        @error('password_confirmation')
+                            <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="row buttons">
-                        <div class="col-md-6 right">
-                            <button type="submit">دخول</button>
-                        </div>
-                        <div class="col-md-6 left">
-                            <a href="#">انشاء حساب جديد</a>
+                        <div class="col-md-12 center">
+                            <button type="submit">تأكيد</button>
                         </div>
                     </div>
                 {!! Form::close() !!}

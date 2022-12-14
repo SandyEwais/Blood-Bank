@@ -68,7 +68,7 @@
                                 <p class="welcome">مرحباً بك</p>
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        احمد محمد
+                                        {{Auth::guard('web-clients')->user()->name}}
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -96,10 +96,15 @@
                                             <i class="fas fa-phone-alt"></i>
                                             تواصل معنا
                                         </a>
-                                        <a class="dropdown-item" href="index.html">
+                                        {!! Form::open([
+                                            'method' => 'post',
+                                            'route' => 'clients.logout',
+                                        ]) !!}
+                                        <button class="dropdown-item">
                                             <i class="fas fa-sign-out-alt"></i>
                                             تسجيل الخروج
-                                        </a>
+                                        </button>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +152,7 @@
                         <!-- not a member -->
                         @guest('web-clients')
                             <div class="accounts">
-                                <a href="#" class="create">إنشاء حساب جديد</a>
+                                <a href="{{route('clients.register')}}" class="create">إنشاء حساب جديد</a>
                                 <a href="{{route('clients.login')}}" class="signin">الدخول</a>
                             </div>
                         @endguest
@@ -243,5 +248,24 @@
         <script src="{{asset('websiteAssets/js/main.js')}}"></script>
 
         @stack('scripts')
+        {{-- <script>
+            $(".confirm").confirm({
+                text: "Are you sure you want to delete that comment?",
+                title: "Confirmation required",
+                confirm: function(button) {
+                    alert('confirm')
+                },
+                cancel: function(button) {
+                    // nothing to do
+                },
+                confirmButton: "Yes I am",
+                cancelButton: "No",
+                post: true,
+                confirmButtonClass: "btn-danger",
+                cancelButtonClass: "btn-default",
+                dialogClass: "modal-dialog modal-lg" // Bootstrap classes for large modal
+            });
+        </script> --}}
+        
     </body>
 </html>

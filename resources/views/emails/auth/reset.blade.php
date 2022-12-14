@@ -3,9 +3,9 @@
 
 
 
-<x-mail::button :url="'https://www.google.com/'">
+{{-- <x-mail::button :url="'https://www.google.com/'">
 Reset
-</x-mail::button>
+</x-mail::button> --}}
 
 #Your Reset Code Is : {{$code}}
 

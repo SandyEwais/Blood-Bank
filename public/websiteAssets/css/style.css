@@ -438,8 +438,8 @@ p {
     transition: all 0.25s ease-in-out;
 }
 
-.footer .other .social .icons .whatsapp:hover {
-    color: #25D366;
+.footer .other .social .icons .youtube:hover {
+    color: #e61111;
     transition: all 0.25s ease-in-out;
 }
 
@@ -1052,7 +1052,7 @@ select {
     margin: 50px 0;
 }
 
-.create .form .account-form form .create-btn input {
+.create .form .account-form form .create-btn button {
     padding: 15px 120px;
     font-size: 20px;
     border-radius: 0;
@@ -1063,7 +1063,7 @@ select {
     cursor: pointer;
 }
 
-.create .form .account-form form .create-btn input:hover {
+.create .form .account-form form .create-btn button:hover {
     color: #3ab54a;
     background-color: #fff;
     outline: 2px auto #3ab54a;
@@ -1074,7 +1074,7 @@ select {
     -o-transition: all 0.25s ease-in-out;
 }
 
-.create .form .account-form form .create-btn input:focus {
+.create .form .account-form form .create-btn button:focus {
     outline: none;
 }
 
@@ -1163,6 +1163,30 @@ select {
 .signin-account .form .signin-form form .buttons .right {
     display: flex;
     justify-content: flex-start;
+}
+
+.signin-account .form .signin-form form .buttons .center button {
+    padding: 15px 0;
+    margin: 10px 0;
+    font-size: 20px;
+    border-radius: 0;
+    color: #FFF;
+    border: none;
+    width: 100%;
+    background-color: #3ab54a;
+    text-align: center;
+    text-decoration: none;
+}
+
+.signin-account .form .signin-form form .buttons .center button:hover {
+    color: #3ab54a;
+    background-color: #FFF;
+    outline: 2px auto #3ab54a;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
 }
 
 .signin-account .form .signin-form form .buttons .right button {
@@ -1857,7 +1881,7 @@ select {
         height: auto;
     }
 
-    .create .form .account-form form .create-btn input {
+    .create .form .account-form form .create-btn button {
         padding: 15px 90px;
     }
 
