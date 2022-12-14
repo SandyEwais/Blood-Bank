@@ -46,8 +46,10 @@
                         </div>
                     </div>
                     
-                    <!-- not a member-->
+                    
                     <div class="col-lg-4">
+                        <!-- not a member-->
+                    @guest('web-clients')
                         <div class="info" dir="ltr">
                             <div class="phone">
                                 <i class="fas fa-phone-alt"></i>
@@ -58,51 +60,52 @@
                                 <p>{{$settings->contact_email}}</p>
                             </div>
                         </div>
-                        
-                        <!--I'm a member
+                    @endguest
 
+                    <!--I'm a member -->
+                    @auth('web-clients')
                         <div class="member">
-                            <p class="welcome">مرحباً بك</p>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    احمد محمد
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="index-1.html">
-                                        <i class="fas fa-home"></i>
-                                        الرئيسية
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="far fa-user"></i>
-                                        معلوماتى
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="far fa-bell"></i>
-                                        اعدادات الاشعارات
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="far fa-heart"></i>
-                                        المفضلة
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="far fa-comments"></i>
-                                        ابلاغ
-                                    </a>
-                                    <a class="dropdown-item" href="contact-us.html">
-                                        <i class="fas fa-phone-alt"></i>
-                                        تواصل معنا
-                                    </a>
-                                    <a class="dropdown-item" href="index.html">
-                                        <i class="fas fa-sign-out-alt"></i>
-                                        تسجيل الخروج
-                                    </a>
+                                <p class="welcome">مرحباً بك</p>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        احمد محمد
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="index-1.html">
+                                            <i class="fas fa-home"></i>
+                                            الرئيسية
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="far fa-user"></i>
+                                            معلوماتى
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="far fa-bell"></i>
+                                            اعدادات الاشعارات
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="far fa-heart"></i>
+                                            المفضلة
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="far fa-comments"></i>
+                                            ابلاغ
+                                        </a>
+                                        <a class="dropdown-item" href="contact-us.html">
+                                            <i class="fas fa-phone-alt"></i>
+                                            تواصل معنا
+                                        </a>
+                                        <a class="dropdown-item" href="index.html">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            تسجيل الخروج
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        -->
                         
+                    @endauth
+
                     </div>
                 </div>
             </div>
@@ -141,20 +144,25 @@
                             </li>
                         </ul>
                         
-                        <!--not a member-->
-                        <div class="accounts">
-                            <a href="" class="create">إنشاء حساب جديد</a>
-                            <a href="{{route('login')}}" class="signin">الدخول</a>
-                        </div>
+                        <!-- not a member -->
+                        @guest('web-clients')
+                            <div class="accounts">
+                                <a href="#" class="create">إنشاء حساب جديد</a>
+                                <a href="{{route('clients.login')}}" class="signin">الدخول</a>
+                            </div>
+                        @endguest
                         
-                        {{-- I'm a member
+                        
+                        {{-- I'm a member --}}
+                        @auth('web-clients')
+                            <a href="#" class="donate">
+                                <img src="{{asset('websiteAssets/imgs/transfusion.svg')}}">
+                                <p>طلب تبرع</p>
+                            </a>
+                        @endauth
+                        
 
-                        <a href="#" class="donate">
-                            <img src="{{asset('websiteAssets/imgs/transfusion.svg')}}">
-                            <p>طلب تبرع</p>
-                        </a>
-
-                         --}}
+                         
                         
                     </div>
                 </div>

@@ -15,15 +15,32 @@
                 </nav>
             </div>
             <div class="signin-form">
-                <form>
+                {!! Form::open([
+                    'method' => 'post',
+                    'route' => 'clients.login'
+                ]) !!}
                     <div class="logo">
                         <img src="{{asset('websiteAssets/imgs/logo.png')}}">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="الجوال">
+                        {!! Form::number('phone', null, [
+                            'class' => 'form-control',
+                            'id' => 'exampleInputEmail1',
+                            'placeholder' => 'الجوال'
+                        ]) !!}
+                        @error('phone')
+                            <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور">
+                        {!! Form::password('password', [
+                            'class' => 'form-control',
+                            'id' => 'exampleInputPassword1',
+                            'placeholder' => 'كلمة المرور'
+                        ]) !!}
+                        @error('password')
+                            <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="row options">
                         <div class="col-md-6 remember">
@@ -45,7 +62,7 @@
                             <a href="#">انشاء حساب جديد</a>
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

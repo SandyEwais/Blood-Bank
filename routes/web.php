@@ -10,9 +10,9 @@ use App\Http\Controllers\Admin\GovernorateController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Website\AuthController;
 use App\Http\Controllers\Website\MainController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Fortify;
 use Spatie\Permission\Contracts\Role;
 
 /*
@@ -31,9 +31,11 @@ Route::group([],function(){
     Route::get('/home',[MainController::class,'home'])->name('home');
     Route::get('/donation-requests',[MainController::class,'donationRequests'])->name('donation-requests');
     //test
-    Route::post('/test',[MainController::class,'test'])->name('test');
-    //auth
+    Route::post('/test',[MainController::class,'test'])->name('test');   
 });
+Route::get('/login',[AuthController::class,'login'])->name('clients.login');
+Route::post('/login',[AuthController::class,'authenticate'])->name('clients.authenticate');
+
 
 
 //Admin Dashboard
@@ -57,11 +59,10 @@ Route::group(['middleware' => ['auth','check_permission'],'prefix' => 'dashboard
 });
 
 
-//added a prefix, must be modified in dashboard routes
 Route::group(['prefix' => 'dashboard'],function(){
-    Route::get('/login',[UserController::class,'login'])->name('user.login');
-    Route::post('/authenticate',[UserController::class,'authenticate'])->name('authenticate');
-    Route::post('/logout',[UserController::class,'logout'])->name('user.logout');
+    Route::get('/login',[UserController::class,'login'])->name('users.login');
+    Route::post('/login',[UserController::class,'authenticate'])->name('users.authenticate');
+    Route::post('/logout',[UserController::class,'logout'])->name('users.logout');
 });
 
 

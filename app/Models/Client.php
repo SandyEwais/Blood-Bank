@@ -4,8 +4,9 @@ namespace App\Models;
 
 use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Client extends Model 
+class Client extends Authenticatable 
 {
     use Searchable;
     public $columns = ['phone', 'password', 'pin_code', 'name', 'email', 'd_o_b', 'last_donation_date', 'blood_type_id', 'city_id'];

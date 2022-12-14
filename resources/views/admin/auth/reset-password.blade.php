@@ -1,5 +1,5 @@
 @inject('user', 'App\Models\User')
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('page-name')
     Reset Password
 @endsection

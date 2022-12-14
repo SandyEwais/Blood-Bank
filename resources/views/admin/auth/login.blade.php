@@ -29,7 +29,7 @@
                     <div class="card card-light card-outline">
                     <div class="card-body">
                         {!! Form::model($user, [
-                            'route' => 'authenticate'
+                            'route' => 'users.authenticate'
                         ]) !!}
                         <div class="form-group">
                             {!! Form::label('email', 'Email') !!}
