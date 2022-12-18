@@ -16,7 +16,23 @@ class AuthController extends Controller
         return view('website.auth.register');
     }
     //create new client
-    public function create(){}
+    public function create(Request $request){
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|unique:clients',
+            'phone' => 'required|unique:clients',
+            'password' => 'required|confirmed',
+            'blood_type_id' => 'required',
+            'city_id' => 'required',
+            'd_o_b' => 'required',
+            'last_donation_date' => 'required'
+        ]);
+        $request->merge(['password'=> bcrypt($request->password)]);
+        $client = Client::create($request->all());
+        $client->bloodTypes()->attach($client->blood_type_id);
+        $client->governorates()->attach($client->city->governorate_id);
+        return redirect()->route('clients.login');
+    }
     //login view
     public function login(){
         return view('website.auth.login');

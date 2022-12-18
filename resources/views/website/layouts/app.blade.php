@@ -25,6 +25,7 @@
         <title>Blood Bank</title>
     </head>
     <body class="{{$bodyClass ?? ""}}">
+
         <!--upper-bar-->
         <div class="upper-bar">
             <div class="container">
@@ -72,7 +73,7 @@
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="index-1.html">
+                                        <a class="dropdown-item" href="{{route('home')}}">
                                             <i class="fas fa-home"></i>
                                             الرئيسية
                                         </a>
@@ -96,15 +97,12 @@
                                             <i class="fas fa-phone-alt"></i>
                                             تواصل معنا
                                         </a>
-                                        {!! Form::open([
-                                            'method' => 'post',
-                                            'route' => 'clients.logout',
-                                        ]) !!}
-                                        <button class="dropdown-item">
+                                        
+                                        <button data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">
                                             <i class="fas fa-sign-out-alt"></i>
                                             تسجيل الخروج
                                         </button>
-                                        {!! Form::close() !!}
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +127,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
+                            <li class="nav-item {{Route::current()->getName() == 'home' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('home')}}">الرئيسية <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
@@ -138,7 +136,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">المقالات</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{Route::current()->getName() == 'donation-requests' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('donation-requests')}}">طلبات التبرع</a>
                             </li>
                             <li class="nav-item">
@@ -174,6 +172,31 @@
             </nav>
         </div>
         {{-- Start Content --}}
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">تسجيل خروج</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                هل أنت متأكد ؟
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">الغاء</button>
+                {!! Form::open([
+                    'method' => 'post',
+                    'route' => 'clients.logout'
+                ]) !!}
+                <button type="submit" class="btn btn-secondary">نعم</button>
+                {!! Form::close() !!}
+                </div>
+            </div>
+            </div>
+        </div>
         @yield('content')
         {{-- End Content --}}
 
@@ -234,8 +257,8 @@
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        
+        {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="{{asset('websiteAssets/js/bootstrap.bundle.js')}}"></script>
         <script src="{{asset('websiteAssets/js/bootstrap.bundle.min.js')}}"></script>
       
@@ -248,24 +271,23 @@
         <script src="{{asset('websiteAssets/js/main.js')}}"></script>
 
         @stack('scripts')
-        {{-- <script>
-            $(".confirm").confirm({
-                text: "Are you sure you want to delete that comment?",
-                title: "Confirmation required",
-                confirm: function(button) {
-                    alert('confirm')
-                },
-                cancel: function(button) {
-                    // nothing to do
-                },
-                confirmButton: "Yes I am",
-                cancelButton: "No",
-                post: true,
-                confirmButtonClass: "btn-danger",
-                cancelButtonClass: "btn-default",
-                dialogClass: "modal-dialog modal-lg" // Bootstrap classes for large modal
-            });
-        </script> --}}
+        <script>
+            function showConfirmBox() {
+                document.getElementById("overlay").hidden = false;
+            }
+            function closeConfirmBox() {
+                document.getElementById("overlay").hidden = true;
+            }
+
+            function isConfirm(answer) {
+                if (answer) {
+                alert("Answer is yes");
+                } else {
+                alert("Answer is no");
+                }
+                closeConfirmBox();
+            }
+        </script>
         
     </body>
 </html>

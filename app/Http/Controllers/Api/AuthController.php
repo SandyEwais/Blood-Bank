@@ -27,6 +27,8 @@ class AuthController extends Controller
             'password' => 'required|confirmed',
             'blood_type_id' => 'required',
             'city_id' => 'required',
+            'd_o_b' => 'required',
+            'last_donation_date' => 'required'
 
         ]);
         if($validator->fails()){

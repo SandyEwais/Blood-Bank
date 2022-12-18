@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
 use App\Models\Article;
-use App\Models\DonationRequest;
 use Illuminate\Http\Request;
+use App\Models\DonationRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -36,9 +37,9 @@ class MainController extends Controller
         return view('website.pages.donation-requests');
     }
 
-
-
-    public function test(Request $request){
-        dd($request);
+    public function toggleFavourite(Request $request){
+        dd(Auth::guard('web-clients')->user());
+        $article = Auth::guard('web-clients')->user()->articles()->toggle($request->article_id);
+        return responseJson(200,'success',$article);
     }
 }

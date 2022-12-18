@@ -27,22 +27,22 @@ use Spatie\Permission\Contracts\Role;
 */
 
 //Front Website
-Route::group([],function(){
+Route::group([],function(){//auth:web-clients ?
     Route::get('/home',[MainController::class,'home'])->name('home');
     Route::get('/donation-requests',[MainController::class,'donationRequests'])->name('donation-requests');
-    //test
-    Route::post('/test',[MainController::class,'test'])->name('test'); 
+    Route::post('/toggle-favourite',[MainController::class,'toggleFavourite'])->name('toggle-favourite');
+    Route::post('/logout',[AuthController::class,'logout'])->name('clients.logout');
 });
-Route::get('/register',[AuthController::class,'register'])->name('clients.register');
-Route::post('/register',[AuthController::class,'create'])->name('clients.create');
-Route::get('/login',[AuthController::class,'login'])->name('clients.login');
-Route::post('/login',[AuthController::class,'authenticate'])->name('clients.authenticate');
-Route::post('/logout',[AuthController::class,'logout'])->name('clients.logout');
-Route::get('/forgot-password',[AuthController::class,'forgotPassword'])->name('clients.forgot-password');
-Route::post('/reset-password',[AuthController::class,'sendPinCode'])->name('clients.send-pin-code');
-Route::get('/reset-password',[AuthController::class,'enterPinCode'])->name('clients.enter-pin-code');
-Route::post('/reset-password',[AuthController::class,'confirmPinCode'])->name('clients.confirm-pin-code');
-
+Route::group(['middleware' => 'guest:web-clients'],function(){
+    Route::get('/register',[AuthController::class,'register'])->name('clients.register');
+    Route::post('/register',[AuthController::class,'create'])->name('clients.create');
+    Route::get('/login',[AuthController::class,'login'])->name('clients.login');
+    Route::post('/login',[AuthController::class,'authenticate'])->name('clients.authenticate');
+    Route::get('/forgot-password',[AuthController::class,'forgotPassword'])->name('clients.forgot-password');
+    Route::post('/email-verification',[AuthController::class,'sendPinCode'])->name('clients.send-pin-code');
+    Route::get('/reset-password',[AuthController::class,'enterPinCode'])->name('clients.enter-pin-code');
+    Route::post('/reset-password',[AuthController::class,'confirmPinCode'])->name('clients.confirm-pin-code');
+});
 
 
 

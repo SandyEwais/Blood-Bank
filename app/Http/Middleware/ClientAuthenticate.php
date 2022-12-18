@@ -23,4 +23,6 @@ class ClientAuthenticate
    
         return redirect()->route('clients.login');
     }
+
+    
 }

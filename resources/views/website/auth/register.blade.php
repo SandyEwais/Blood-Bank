@@ -1,3 +1,6 @@
+@inject('bloodTypes', 'App\Models\BloodType');
+@inject('governorates', 'App\Models\Governorate');
+@inject('cities', 'App\Models\City');
 @inject('model', 'App\Models\Client');
 @extends('website.layouts.app',[
     'bodyClass' => 'create'
@@ -19,32 +22,97 @@
                     'methos' => 'post',
                     'route' => 'clients.create'
                 ]) !!}
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="الإسم">
-                    
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكترونى">
-                    
-                    <input placeholder="تاريخ الميلاد" class="form-control" type="text" onfocus="(this.type='date')" id="date">
-                    
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="فصيلة الدم">
-                    
-
-                    <select class="form-control" id="governorates" name="governorate">
-                        <option selected disabled hidden value="">المحافظة</option>
-                        <option value="1">الدقهلية</option>
-                        <option value="2">الغربية</option>
-                    </select>
-                    
-                    <select class="form-control" id="cities" name="city">
-                        <option  selected disabled hidden value="">المدينة</option>
-                    </select>
-                    
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="رقم الهاتف">
-                    
-                    <input placeholder="آخر تاريخ تبرع" class="form-control" type="text" onfocus="(this.type='date')" id="date">
-                    
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور">
-                    
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="تأكيد كلمة المرور">
+                <div class="form-group">
+                    {!! Form::text('name', null, [
+                    'class' => 'form-control',
+                    'id' => 'exampleInputEmail1',
+                    'placeholder' => 'الإسم'
+                    ]) !!}
+                    @error('name')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::email('email', null, [
+                    'class' => 'form-control',
+                    'id' => 'exampleInputEmail1',
+                    'placeholder' => 'البريد الإلكترونى'
+                    ]) !!}
+                    @error('email')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::text('d_o_b', null, [
+                    'class' => 'form-control',
+                    'id' => 'date',
+                    'placeholder' => 'تاريخ الميلاد',
+                    'onfocus' => 'this.type="date"'
+                    ]) !!}
+                    @error('d_o_b')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::select('blood_type_id', ['فصيلة الدم'] + $bloodTypes->pluck('name','id')->toArray(), null, [
+                    'class' => 'form-control',
+                    'id' => 'blood_types',
+                    ]) !!}
+                    @error('blood_type_id')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::select('city_id', ['المدينة'] + $cities->pluck('name','id')->toArray(), null, [
+                        'class' => 'form-control',
+                        'id' => 'cities',
+                    ]) !!}  
+                    @error('city_id')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror  
+                </div>                    
+                
+                <div class="form-group">
+                    {!! Form::number('phone', null, [
+                    'class' => 'form-control',
+                    'id' => 'exampleInputEmail1',
+                    'placeholder' => 'الهاتف'
+                    ]) !!}
+                    @error('phone')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::text('last_donation_date', null, [
+                    'class' => 'form-control',
+                    'id' => 'date',
+                    'placeholder' => 'تاريخ اخر تبرع',
+                    'onfocus' => 'this.type="date"'
+                    ]) !!}
+                    @error('last_donation_date')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::password('password', [
+                        'class' => 'form-control',
+                        'id' => 'exampleInputPassword1',
+                        'placeholder' => 'كلمة المرور'
+                    ]) !!}
+                    @error('password')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::password('password_confirmation', [
+                        'class' => 'form-control',
+                        'id' => 'exampleInputPassword1',
+                        'placeholder' => 'تأكيد كلمة المرور'
+                    ]) !!}
+                    @error('password_confirmation')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>        
                     
                     <div class="create-btn">
                         <button>انساء</button>

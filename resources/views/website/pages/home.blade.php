@@ -80,7 +80,7 @@
                                     <a href="article-details.html" class="click">المزيد</a>
                                 </div>
 
-                                    <i id="{{$article->id}}" onclick="toggleFavourite(this)" class="notfavourite far fa-heart"></i>
+                                    <i id="{{$article->id}}" onclick="toggleFavourite(this)" class="{{$article->IsFavourite ? 'favourite' : 'notfavourite'}} far fa-heart"></i>
                                 
 
                                 <div class="card-body">
@@ -216,12 +216,25 @@
 @push('scripts')
     <script>
         function toggleFavourite(obj){
-            var className = obj.getAttribute('class')
-            if(className == 'favourite far fa-heart') {
-                obj.setAttribute('class','notfavourite far fa-heart');
-            } else {
-                obj.setAttribute('class','favourite far fa-heart');
-            }
+            var article_id = obj.id;
+            $.ajax({
+                type: "post",
+                url: "{{route('toggle-favourite')}}",
+                data: {
+                    _token: "{{csrf_token()}}",
+                    article_id: article_id
+                }, 
+                success: function (response) {
+                    var className = obj.getAttribute('class')
+                    if(className == 'favourite far fa-heart') {
+                        obj.setAttribute('class','notfavourite far fa-heart');
+                    } else {
+                        obj.setAttribute('class','favourite far fa-heart');
+                    }
+                    console.log(response);
+                }
+            });
+            
         }
     </script>
 @endpush

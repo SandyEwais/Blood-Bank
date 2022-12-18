@@ -27,4 +27,19 @@ class Article extends Model
         return $this->belongsToMany('App\Models\Client');
     }
 
+    public function getIsFavouriteAttribute(){
+        $client = auth()->guard('web-clients')->user();
+        if(!$client){
+            return false;
+        }
+        $favourite = $this->whereHas('clients',function($query)use($client){
+            $query->where('article_client.client_id',$client->id);
+            $query->where('article_client.article_id',$this->id);
+        })->first();
+        if($favourite){
+            return true;
+        }
+        return false;
+    }
+
 }

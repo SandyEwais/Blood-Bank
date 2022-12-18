@@ -1,3 +1,26 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2;
+  }
+
+  .confirm-box {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+    text-align: center;
+    background: white;
+  }
+
+  .close {
+    cursor: pointer;
+  }
 /*--------------------------------public settings--------------------------------------*/
 
 body {
@@ -567,7 +590,7 @@ p {
     background-image: url(../imgs/about2.png);
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 70px 0;
+    padding: 177px 0;
 }
 
 .about span {
