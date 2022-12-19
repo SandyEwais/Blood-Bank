@@ -37,4 +37,6 @@ class DonationRequest extends Model
         return $this->hasOne('App\Models\Notification');
     }
 
+    
+
 }

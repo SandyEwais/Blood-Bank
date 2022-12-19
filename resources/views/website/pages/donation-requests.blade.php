@@ -23,16 +23,16 @@
                 <h2>طلبات التبرع</h2>
             </div>
             <div class="content">
-                <form class="row filter">
+                <form class="row filter" action="{{route('donation-requests')}}">
                     <div class="col-md-5 blood">
                         <div class="form-group">
                             <div class="inside-select">
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <select name="blood_type_id" class="form-control" id="exampleFormControlSelect1">
                                     <option selected disabled>اختر فصيلة الدم</option>
-                                    <option>+A</option>
-                                    <option>+B</option>
-                                    <option>+AB</option>
-                                    <option>-O</option>
+                                    @foreach ($bloodTypes->all() as $bloodType)
+                                        <option value="{{$bloodType->id}}">{{$bloodType->name}}</option>
+                                    @endforeach
+                                    
                                 </select>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
@@ -41,12 +41,11 @@
                     <div class="col-md-5 city">
                         <div class="form-group">
                             <div class="inside-select">
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <select name="city_id" class="form-control" id="exampleFormControlSelect1">
                                     <option selected disabled>اختر المدينة</option>
-                                    <option>المنصورة</option>
-                                    <option>القاهرة</option>
-                                    <option>الإسكندرية</option>
-                                    <option>سوهاج</option>
+                                    @foreach ($cities->all() as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                    @endforeach
                                 </select>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
@@ -59,99 +58,24 @@
                     </div>
                 </form>
                 <div class="patients">
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">B+</h2>
+                    @foreach ($donationRequests as $donationRequest)
+                        <div class="details">
+                            <div class="blood-type">
+                                <h2 dir="ltr">{{$donationRequest->bloodType->name}}</h2>
+                            </div>
+                            <ul>
+                                <li><span>اسم الحالة:</span> {{$donationRequest->patient_name}}</li>
+                                <li><span>مستشفى:</span> {{$donationRequest->hospital_name}}</li>
+                                <li><span>المدينة:</span> {{$donationRequest->city->name}}</li>
+                            </ul>
+                            <a href="{{route('donation-request',['donationRequest' => $donationRequest->id])}}">التفاصيل</a>
                         </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">A+</h2>
-                        </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">AB+</h2>
-                        </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">O-</h2>
-                        </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">B+</h2>
-                        </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">A+</h2>
-                        </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">AB+</h2>
-                        </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
-                    <div class="details">
-                        <div class="blood-type">
-                            <h2 dir="ltr">O-</h2>
-                        </div>
-                        <ul>
-                            <li><span>اسم الحالة:</span> احمد محمد احمد</li>
-                            <li><span>مستشفى:</span> القصر العينى</li>
-                            <li><span>المدينة:</span> المنصورة</li>
-                        </ul>
-                        <a href="#">التفاصيل</a>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="pages">
                     <nav aria-label="Page navigation example" dir="ltr">
                         <ul class="pagination">
-                            <li class="page-item">
+                            {{-- <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
@@ -166,7 +90,9 @@
                                 <a class="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
-                            </li>
+                            </li> --}}
+                            {{ $donationRequests->links('vendor.pagination.custom',['elements' => $donationRequests]) }}
+                            
                         </ul>
                     </nav>
                 </div>

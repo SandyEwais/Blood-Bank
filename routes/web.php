@@ -27,9 +27,16 @@ use Spatie\Permission\Contracts\Role;
 */
 
 //Front Website
-Route::group([],function(){//auth:web-clients ?
-    Route::get('/home',[MainController::class,'home'])->name('home');
-    Route::get('/donation-requests',[MainController::class,'donationRequests'])->name('donation-requests');
+Route::get('/home',[MainController::class,'home'])->name('home');
+Route::get('/donation-requests',[MainController::class,'donationRequests'])->name('donation-requests');
+Route::get('/donation-request/{donationRequest}',[MainController::class,'donationRequest'])->name('donation-request');
+Route::get('/about',[MainController::class,'aboutBloodBank'])->name('about-blood-bank');
+Route::get('/about-us',[MainController::class,'aboutUs'])->name('about-us');
+Route::get('/articles',[MainController::class,'articles'])->name('articles');
+Route::get('/article/{article}',[MainController::class,'article'])->name('article-details');
+Route::get('/contact-us',[MainController::class,'contactUs'])->name('contact-us');
+
+Route::group(['middleware' => 'client_auth'],function(){
     Route::post('/toggle-favourite',[MainController::class,'toggleFavourite'])->name('toggle-favourite');
     Route::post('/logout',[AuthController::class,'logout'])->name('clients.logout');
 });

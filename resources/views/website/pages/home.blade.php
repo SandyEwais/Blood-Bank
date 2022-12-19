@@ -20,7 +20,7 @@
                             <p>
                                 هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص. 
                             </p>
-                            <a href="#">المزيد</a>
+                            <a href="{{route('about-blood-bank')}}">المزيد</a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                             <p>
                                 هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص. 
                             </p>
-                            <a href="#">المزيد</a>
+                            <a href="{{route('about-blood-bank')}}">المزيد</a>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                             <p>
                                 هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي. 
                             </p>
-                            <a href="#">المزيد</a>
+                            <a href="{{route('about-blood-bank')}}">المزيد</a>
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                                 <li><span>مستشفى:</span> {{$donationRequest->hospital_name}}</li>
                                 <li><span>المدينة:</span> {{$donationRequest->city->name}}</li>
                             </ul>
-                            <a href="inside-request.html">التفاصيل</a>
+                            <a href="{{route('donation-request',['donationRequest' => $donationRequest->id])}}">التفاصيل</a>
                         </div>
                     @endforeach
                 </div>

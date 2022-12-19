@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\BloodType;
 use App\Models\Settings;
+use App\Models\BloodType;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

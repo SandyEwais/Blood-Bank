@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     public function home(Request $request){
-
-        
         $articles = Article::take(9)->get();
         $donationRequests = DonationRequest::where(function($query) use($request){
             if($request->has('city_id')){
@@ -25,6 +23,14 @@ class MainController extends Controller
         return view('website.pages.home',compact('articles','donationRequests'));
     }
 
+    public function articles(){
+        $articles = Article::all();
+        return view('website.pages.articles',compact('articles'));
+    }
+    public function article(Article $article){
+        return view('website.pages.article-details',compact('article'));
+    }
+
     public function donationRequests(Request $request){
         $donationRequests = DonationRequest::where(function($query) use($request){
             if($request->has('city_id')){
@@ -33,8 +39,13 @@ class MainController extends Controller
             if($request->has('blood_type_id')){
                 $query->where('blood_type_id',$request->blood_type_id); 
             }
-        })->get();
-        return view('website.pages.donation-requests');
+        })->paginate(6);
+        return view('website.pages.donation-requests',compact('donationRequests'));
+    }
+    public function donationRequest(DonationRequest $donationRequest){
+        return view('website.pages.donation-request-details',[
+            'donationRequest' => $donationRequest
+        ]);
     }
 
     public function toggleFavourite(Request $request){
@@ -42,4 +53,15 @@ class MainController extends Controller
         $article = Auth::guard('web-clients')->user()->articles()->toggle($request->article_id);
         return responseJson(200,'success',$article);
     }
+
+    public function aboutBloodBank(){
+        return view('website.pages.about-blood-bank');
+    }
+    public function aboutUs(){
+        return view('website.pages.about-us');
+    }
+    public function contactUs(){
+        return view('website.pages.contact-us');
+    }
+
 }

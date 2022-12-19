@@ -131,19 +131,19 @@
                                 <a class="nav-link" href="{{route('home')}}">الرئيسية <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">عن بنك الدم</a>
+                                <a class="nav-link" href="{{route('about-blood-bank')}}">عن بنك الدم</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">المقالات</a>
+                                <a class="nav-link" href="{{route('articles')}}">المقالات</a>
                             </li>
                             <li class="nav-item {{Route::current()->getName() == 'donation-requests' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('donation-requests')}}">طلبات التبرع</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="who-are-us.html">من نحن</a>
+                                <a class="nav-link" href="{{route('about-us')}}">من نحن</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.html">اتصل بنا</a>
+                                <a class="nav-link" href="{{route('contact-us')}}">اتصل بنا</a>
                             </li>
                         </ul>
                         
@@ -214,12 +214,12 @@
                         </div>
                         <div class="pages col-md-4">
                             <div class="list-group" id="list-tab" role="tablist">
-                                <a class="list-group-item list-group-item-action active" id="list-home-list" href="index.html" role="tab" aria-controls="home">الرئيسية</a>
-                                <a class="list-group-item list-group-item-action" id="list-profile-list" href="#" role="tab" aria-controls="profile">عن بنك الدم</a>
-                                <a class="list-group-item list-group-item-action" id="list-messages-list" href="#" role="tab" aria-controls="messages">المقالات</a>
-                                <a class="list-group-item list-group-item-action" id="list-settings-list" href="donation-requests.html" role="tab" aria-controls="settings">طلبات التبرع</a>
-                                <a class="list-group-item list-group-item-action" id="list-settings-list" href="who-are-us.html" role="tab" aria-controls="settings">من نحن</a>
-                                <a class="list-group-item list-group-item-action" id="list-settings-list" href="contact-us.html" role="tab" aria-controls="settings">اتصل بنا</a>
+                                <a class="list-group-item list-group-item-action {{Route::current()->getName() == 'home' ? 'active' : ''}}" id="list-home-list" href="{{route('home')}}" role="tab" aria-controls="home">الرئيسية</a>
+                                <a class="list-group-item list-group-item-action {{Route::current()->getName() == 'about' ? 'active' : ''}}" id="list-profile-list" href="{{route('about-blood-bank')}}" role="tab" aria-controls="profile">عن بنك الدم</a>
+                                <a class="list-group-item list-group-item-action {{Route::current()->getName() == 'articles' ? 'active' : ''}}" id="list-messages-list" href="{{route('articles')}}" role="tab" aria-controls="messages">المقالات</a>
+                                <a class="list-group-item list-group-item-action {{Route::current()->getName() == 'donation-requests' ? 'active' : ''}}" id="list-settings-list" href="{{route('donation-requests')}}" role="tab" aria-controls="settings">طلبات التبرع</a>
+                                <a class="list-group-item list-group-item-action {{Route::current()->getName() == 'about-us' ? 'active' : ''}}" id="list-settings-list" href="{{route('about-us')}}" role="tab" aria-controls="settings">من نحن</a>
+                                <a class="list-group-item list-group-item-action {{Route::current()->getName() == 'contact-us' ? 'active' : ''}}" id="list-settings-list" href="{{route('contact-us')}}" role="tab" aria-controls="settings">اتصل بنا</a>
                             </div>
                         </div>
                         <div class="stores col-md-4">
@@ -256,6 +256,8 @@
         </div>
         
         <!-- Optional JavaScript -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
