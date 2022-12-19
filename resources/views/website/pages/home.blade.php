@@ -77,7 +77,7 @@
                             <div class="card">
                                 <div class="photo">
                                     <img src="{{asset('websiteAssets/imgs/p2.jpg')}}" class="card-img-top" alt="...">
-                                    <a href="article-details.html" class="click">المزيد</a>
+                                    <a href="{{route('article-details',['article' => $article->id])}}" class="click">المزيد</a>
                                 </div>
 
                                     <i id="{{$article->id}}" onclick="toggleFavourite(this)" class="{{$article->IsFavourite ? 'favourite' : 'notfavourite'}} far fa-heart"></i>

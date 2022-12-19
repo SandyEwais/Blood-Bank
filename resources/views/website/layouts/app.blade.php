@@ -77,23 +77,19 @@
                                             <i class="fas fa-home"></i>
                                             الرئيسية
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{route('profile',['client' => Auth::guard('web-clients')->user()->id])}}">
                                             <i class="far fa-user"></i>
                                             معلوماتى
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{route('settings',['client' => Auth::guard('web-clients')->user()->id])}}">
                                             <i class="far fa-bell"></i>
                                             اعدادات الاشعارات
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{route('favourites')}}">
                                             <i class="far fa-heart"></i>
                                             المفضلة
                                         </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="far fa-comments"></i>
-                                            ابلاغ
-                                        </a>
-                                        <a class="dropdown-item" href="contact-us.html">
+                                        <a class="dropdown-item" href="{{route('contact-us')}}">
                                             <i class="fas fa-phone-alt"></i>
                                             تواصل معنا
                                         </a>
@@ -130,19 +126,19 @@
                             <li class="nav-item {{Route::current()->getName() == 'home' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('home')}}">الرئيسية <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{Route::current()->getName() == 'about' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('about-blood-bank')}}">عن بنك الدم</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{Route::current()->getName() == 'articles' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('articles')}}">المقالات</a>
                             </li>
                             <li class="nav-item {{Route::current()->getName() == 'donation-requests' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('donation-requests')}}">طلبات التبرع</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{Route::current()->getName() == 'about-us' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('about-us')}}">من نحن</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{Route::current()->getName() == 'contact-us' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('contact-us')}}">اتصل بنا</a>
                             </li>
                         </ul>

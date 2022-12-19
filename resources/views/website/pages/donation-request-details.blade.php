@@ -7,8 +7,8 @@
             <div class="path">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">الرئيسية</a></li>
-                        <li class="breadcrumb-item"><a href="donation-requests.html">طلبات التبرع</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('donation-requests')}}">طلبات التبرع</a></li>
                         <li class="breadcrumb-item active" aria-current="page">طلب التبرع: {{$donationRequest->patient_name}}</li>
                     </ol>
                 </nav>

@@ -8,7 +8,8 @@
             <div class="path">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">الرئيسية</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('articles')}}">المقالات</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$article->category->name}}</li>
                     </ol>
                 </nav>

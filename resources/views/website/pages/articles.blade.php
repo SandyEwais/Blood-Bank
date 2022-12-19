@@ -11,6 +11,14 @@
     </div>
     <div class="view">
         <div class="container">
+            <div class="path">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">المقالات</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="row">
                 <!-- Set up your HTML -->
                     @foreach ($articles as $article)

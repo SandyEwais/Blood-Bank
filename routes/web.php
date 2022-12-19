@@ -36,9 +36,17 @@ Route::get('/articles',[MainController::class,'articles'])->name('articles');
 Route::get('/article/{article}',[MainController::class,'article'])->name('article-details');
 Route::get('/contact-us',[MainController::class,'contactUs'])->name('contact-us');
 
+//auth:web-clients
 Route::group(['middleware' => 'client_auth'],function(){
     Route::post('/toggle-favourite',[MainController::class,'toggleFavourite'])->name('toggle-favourite');
     Route::post('/logout',[AuthController::class,'logout'])->name('clients.logout');
+    Route::get('/clients/{client}/profile',[MainController::class,'profile'])->name('profile');
+    Route::post('/clients/profile',[MainController::class,'saveProfile'])->name('save-profile');
+    Route::get('/favourites',[MainController::class,'favourites'])->name('favourites');
+    Route::get('/clients/{client}/settings',[MainController::class,'notificationSettings'])->name('settings');
+    Route::post('/clients/settings',[MainController::class,'saveNotificationSettings'])->name('save-settings');
+    
+    
 });
 Route::group(['middleware' => 'guest:web-clients'],function(){
     Route::get('/register',[AuthController::class,'register'])->name('clients.register');

@@ -6,7 +6,9 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\DonationRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class MainController extends Controller
 {
@@ -22,6 +24,39 @@ class MainController extends Controller
         })->take(4)->get();
         return view('website.pages.home',compact('articles','donationRequests'));
     }
+    public function notificationSettings(Client $client){
+        $selected_blood_types = $client->bloodTypes()->pluck('id')->toArray();
+        $selected_governorates = $client->governorates()->pluck('id')->toArray();
+        return view('website.pages.notification-settings',[
+            'selected_blood_types' => $selected_blood_types,
+            'selected_governorates' => $selected_governorates
+        ]);
+    }
+    public function saveNotificationSettings(Request $request){
+        $client = Auth::guard('web-clients')->user();
+        $client->bloodTypes()->sync($request->blood_type_id);
+        $client->governorates()->sync($request->governorate_id);
+        return redirect()->back()->with('message','تم التحديث بنجاح !');
+    }
+
+    public function profile(Client $client){
+        return view('website.pages.profile',[
+            'client' => $client
+        ]);
+    }
+    public function saveProfile(Request $request){
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|unique:clients,email,'.Auth::guard('web-clients')->user()->id,
+            'phone' => 'required|unique:clients,phone,'.Auth::guard('web-clients')->user()->id,
+            'blood_type_id' => 'required',
+            'city_id' => 'required',
+            'd_o_b' => 'required',
+            'last_donation_date' => 'required'
+        ]);
+        Auth::guard('web-clients')->user()->update($request->all());
+        return 'success';
+    }
 
     public function articles(){
         $articles = Article::all();
@@ -29,6 +64,12 @@ class MainController extends Controller
     }
     public function article(Article $article){
         return view('website.pages.article-details',compact('article'));
+    }
+
+    public function favourites(){
+        $client = Auth::guard('web-clients')->user();
+        $favourites = $client->articles;
+        return view('website.pages.favourites',compact('favourites'));
     }
 
     public function donationRequests(Request $request){
@@ -49,7 +90,6 @@ class MainController extends Controller
     }
 
     public function toggleFavourite(Request $request){
-        dd(Auth::guard('web-clients')->user());
         $article = Auth::guard('web-clients')->user()->articles()->toggle($request->article_id);
         return responseJson(200,'success',$article);
     }
